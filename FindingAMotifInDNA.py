@@ -1,4 +1,4 @@
-import VDBioinfo
+import vd_bio_info
 
 strand = input("Input the sequence")
 motif = input("Input the motif")

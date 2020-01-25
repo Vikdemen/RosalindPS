@@ -1,3 +1,6 @@
+from typing import List
+
+
 # class Sequence:
 # def __init__(self, sequence):
 # self.sequence = sequence
@@ -51,4 +54,27 @@ class DNA(NucleotideSequence):
 class RNA(NucleotideSequence):
     type = "RNA"
 
+
 # class Peptide:
+
+def read_files(filename: str):
+    with open(filename, 'r') as file:
+        data = file.readlines()
+    data = [line.replace('/n', '') for line in data]
+    return data
+
+
+def parse_fasta(data: List[str]):
+    sequences = []
+    i = -1
+    for line in data:
+        if line.startswith('>'):
+            sequences.append([line[1:], ""])
+            i += 1
+        else:
+            sequences[i][1] += line
+
+    # throws error if the first line doesn't start with tag
+
+    sequences = [DNA(s[1], s[0]) for s in sequences]
+    return sequences
