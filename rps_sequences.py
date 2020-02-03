@@ -25,7 +25,6 @@ class NucleotideSequence:
 
 
 class DNA(NucleotideSequence):
-    type = "DNA"
 
     COMPLEMENTARY_BASES = {"A": "T", "T": "A", "G": "C", "C": "G"}
 
@@ -53,7 +52,6 @@ class Peptide:
 
 
 class RNA(NucleotideSequence):
-    type = "RNA"
 
     def translate_to_protein(self) -> Peptide:
         peptide_seq = []
@@ -66,6 +64,10 @@ class RNA(NucleotideSequence):
             else:
                 peptide_seq.append(amino)
         return Peptide(''.join(peptide_seq))
+
+    def splice(self, intron: RNA) -> RNA:
+        spliced = self.sequence.replace(intron.sequence, "")
+        return RNA(spliced, self.tag)
 
 
 def calculate_hamming_distance(seq1: NucleotideSequence, seq2: NucleotideSequence) -> int:

@@ -16,7 +16,7 @@ def read_file(filename: str) -> List[str]:
         data = file.readlines()
     # sanitises the data, removing newlines
 
-    data = [line.replace('/n', '') for line in data]
+    data = [line.replace('\n', '') for line in data]
     return data
 # TODO - add other unprintable characters
 
