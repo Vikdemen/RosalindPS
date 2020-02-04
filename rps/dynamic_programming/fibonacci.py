@@ -29,9 +29,7 @@ def count_mortal_rabbits(time: int, lifespan: int) -> int:
     :return:
     We consider that in that problem there is only 1 child pair in litter
     """
-    #if time <= 0:
-        #return 0
-    # it should be here, but with it i get wrong results
+    # returning 0 when time <= 0 gives wrong results
     if time <= 2:
         return 1
     else:

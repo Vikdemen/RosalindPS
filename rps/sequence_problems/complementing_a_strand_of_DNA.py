@@ -1,4 +1,4 @@
-import rps_sequences as seq
+import rps.sequences as seq
 
 
 def main():

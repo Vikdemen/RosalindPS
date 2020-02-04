@@ -1,6 +1,6 @@
 from typing import Tuple
 
-import rps_sequences as seq
+import rps.sequences as seq
 
 """
 Counts every nucleotide in given DNA sequence, then prints counts of A, C, G, T

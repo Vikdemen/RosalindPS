@@ -1,4 +1,4 @@
-import rps_sequences
+import rps.sequences as seq
 
 
 def main():
@@ -12,7 +12,7 @@ def transcribe(dna_sequence: str) -> str:
     :param dna_sequence: DNA sequence to be transcribed
     :return: Transcribed non-reversed sequence with T replaced with U
     """
-    dna = rps_sequences.DNA(dna_sequence)
+    dna = seq.DNA(dna_sequence)
     rna = dna.transcribe()
     return rna.sequence
 
