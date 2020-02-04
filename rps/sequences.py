@@ -1,5 +1,5 @@
 from collections import Counter
-from typing import Dict
+from typing import Dict, Tuple
 
 
 # class Sequence:
@@ -27,6 +27,25 @@ class NucleotideSequence:
 class DNA(NucleotideSequence):
 
     COMPLEMENTARY_BASES = {"A": "T", "T": "A", "G": "C", "C": "G"}
+    purines = {'A', 'G'}
+    pyrimidines = {'C', 'T'}
+
+    def transitions_transversions(self, other) -> Tuple[int, int]:
+        transitions = 0
+        transversions = 0
+        for b1, b2 in zip(self.sequence, other.sequence):
+            if b1 != b2:
+                if b1 in DNA.purines:
+                    if b2 in DNA.purines:
+                        transitions += 1
+                    else:
+                        transversions += 1
+                else:
+                    if b2 in DNA.pyrimidines:
+                        transitions += 1
+                    else:
+                        transversions += 1
+        return transitions, transversions
 
     def transcribe(self):
         new_sequence = self.sequence.replace('T', 'U')
@@ -65,7 +84,7 @@ class RNA(NucleotideSequence):
                 peptide_seq.append(amino)
         return Peptide(''.join(peptide_seq))
 
-    def splice(self, intron: RNA) -> RNA:
+    def splice(self, intron):
         spliced = self.sequence.replace(intron.sequence, "")
         return RNA(spliced, self.tag)
 

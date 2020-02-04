@@ -4,8 +4,6 @@ A module responsible for loading data from files and saving it
 
 from typing import List
 
-from rps_sequences import DNA
-
 
 def read_file(filename: str) -> List[str]:
     """

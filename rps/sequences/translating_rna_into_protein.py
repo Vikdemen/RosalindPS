@@ -1,5 +1,5 @@
-import rps_sequences as seq
-import rps_io_manager as file
+import rps.sequences as seq
+import rps.io_manager as file
 
 
 def main():
