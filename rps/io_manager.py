@@ -1,8 +1,8 @@
 """
 A module responsible for loading data from files and saving it
 """
-
 from typing import List
+from pathlib import Path
 
 
 def read_file(filename: str) -> List[str]:
@@ -10,7 +10,7 @@ def read_file(filename: str) -> List[str]:
     :param filename: a file name with extension. Searches in the same folder.
     :return: A list of strings, each for a line in a text fine. Newlines are stripped.
     """
-    path = "../data/" + filename
+    path = Path(Path(__file__).parent.parent, 'data', filename)
     with open(path, 'r') as file:
         data = file.readlines()
     # sanitises the data, removing newlines

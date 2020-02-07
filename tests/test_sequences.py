@@ -1,3 +1,4 @@
+import pytest as pt
 import rps.sequences as seq
 
 
@@ -66,3 +67,11 @@ def test_translate_to_protein():
     rna_strand = seq.RNA(sample_sequence)
     protein = rna_strand.translate_to_protein()
     assert protein.sequence == 'MAMAPRTEINSTRING'
+
+
+def test_calculate_protein_mass():
+    sample_sequence = 'SKADYEK'
+    expected_mass = 821.392
+    protein = seq.Peptide(sample_sequence)
+    mass = protein.calculate_mass()
+    assert mass == pt.approx(expected_mass)

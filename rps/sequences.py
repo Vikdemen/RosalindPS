@@ -1,3 +1,4 @@
+from __future__ import  annotations
 from collections import Counter
 from typing import Dict, Tuple, List
 
@@ -47,14 +48,19 @@ class DNA(NucleotideSequence):
                         transversions += 1
         return transitions, transversions
 
-    def transcribe(self):
+    def transcribe(self) -> RNA:
+        """
+        :return: RNA strand with the same direction and thymine replaced with uracil
+        """
         new_sequence = self.sequence.replace('T', 'U')
         return RNA(new_sequence)
 
-    def reverse_complement(self):
-        new_sequence = ""
-        for base in self.sequence[::-1]:
-            new_sequence += DNA.COMPLEMENTARY_BASES[base]
+    def reverse_complement(self) -> DNA:
+        """
+        :return: A DNA strand with complementary sequence and opposite direction
+        """
+        new_sequence = [DNA.COMPLEMENTARY_BASES[base] for base in self.sequence[::-1]]
+        new_sequence = ''.join(new_sequence)
         return DNA(new_sequence)
 
     def gc_content(self):
@@ -68,6 +74,14 @@ class DNA(NucleotideSequence):
 class Peptide:
     def __init__(self, sequence: str):
         self.sequence = sequence
+
+    def calculate_mass(self) -> float:
+        """
+        :return: Mass of peptide chain
+        Calculates the monoisotopic mass of protein chain, assuming it fully consists of AA residues.
+        """
+        mass = sum((AA_MASSES[amino] for amino in self.sequence))
+        return mass
 
 
 class RNA(NucleotideSequence):
@@ -90,6 +104,11 @@ class RNA(NucleotideSequence):
 
 
 def calculate_hamming_distance(seq1: NucleotideSequence, seq2: NucleotideSequence) -> int:
+    """
+    :param seq1: Nucleotide sequence
+    :param seq2: Another sequence of same length
+    :return: Number of mismatched nucleotides between two sequences
+    """
     pairs = zip(seq1.sequence, seq2.sequence)
     return len([pair for pair in pairs if pair[0] != pair[1]])
 
@@ -110,10 +129,8 @@ def search_for_motif(sequence: str, motif: str) -> List[int]:
     return positions
 
 
-# Calculates the number of mismatched bases between two sequence_problems
-# We assume that sequence_problems are of equal length
-
-
+# encoding of every aminoacid by 3-base RNA sequences
+# X is stop-codon
 GENETIC_CODE = {
     'UUU': 'F', 'CUU': 'L', 'AUU': 'I', 'GUU': 'V',
     'UUC': 'F', 'CUC': 'L', 'AUC': 'I', 'GUC': 'V',
@@ -132,4 +149,27 @@ GENETIC_CODE = {
     'UGA': 'X', 'CGA': 'R', 'AGA': 'R', 'GGA': 'G',
     'UGG': 'W', 'CGG': 'R', 'AGG': 'R', 'GGG': 'G'
 }
-# X is stop-codon
+
+# monoisotopic masses of aminoacid residues
+AA_MASSES = {
+    'A': 71.03711,
+    'C': 103.00919,
+    'D': 115.02694,
+    'E': 129.04259,
+    'F': 147.06841,
+    'G': 57.02146,
+    'H': 137.05891,
+    'I': 113.08406,
+    'K': 128.09496,
+    'L': 113.08406,
+    'M': 131.04049,
+    'N': 114.04293,
+    'P': 97.05276,
+    'Q': 128.05858,
+    'R': 156.10111,
+    'S': 87.03203,
+    'T': 101.04768,
+    'V': 99.06841,
+    'W': 186.07931,
+    'Y': 163.06333,
+}
