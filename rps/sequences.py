@@ -1,4 +1,4 @@
-from __future__ import  annotations
+from __future__ import annotations
 from collections import Counter
 from typing import Dict, Tuple, List
 
@@ -26,7 +26,6 @@ class NucleotideSequence:
 
 
 class DNA(NucleotideSequence):
-
     COMPLEMENTARY_BASES = {"A": "T", "T": "A", "G": "C", "C": "G"}
     purines = {'A', 'G'}
     pyrimidines = {'C', 'T'}
@@ -88,7 +87,7 @@ class RNA(NucleotideSequence):
 
     def translate_to_protein(self) -> Peptide:
         peptide_seq = []
-        codons = [self.sequence[i:i+3] for i in range(len(self.sequence))[::3]]
+        codons = [self.sequence[i:i + 3] for i in range(len(self.sequence))[::3]]
         for codon in codons:
             amino = GENETIC_CODE[codon]
             if amino == 'X':
