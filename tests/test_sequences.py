@@ -56,9 +56,7 @@ def test_finding_motif_in_dna():
 def test_calculate_hamming_distance():
     sample1 = 'GAGCCTACTAACGGGAT'
     sample2 = 'CATCGTAATGACGGCCT'
-    seq1 = seq.DNA(sample1)
-    seq2 = seq.DNA(sample2)
-    hamming_distance = seq.calculate_hamming_distance(seq1, seq2)
+    hamming_distance = seq.calculate_hamming_distance(sample1, sample2)
     assert hamming_distance == 7
 
 
@@ -75,3 +73,7 @@ def test_calculate_protein_mass():
     protein = seq.Peptide(sample_sequence)
     mass = protein.calculate_mass()
     assert mass == pt.approx(expected_mass)
+
+
+def test_common_substrings():
+    sequences = ['GATTACA', 'TAGACCA', 'ATACA']
