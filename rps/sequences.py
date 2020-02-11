@@ -102,13 +102,13 @@ class RNA(NucleotideSequence):
         return RNA(spliced, self.tag)
 
 
-def calculate_hamming_distance(seq1: NucleotideSequence, seq2: NucleotideSequence) -> int:
+def calculate_hamming_distance(seq1: str, seq2: str) -> int:
     """
-    :param seq1: Nucleotide sequence
+    :param seq1: string, representing nucleotide sequence
     :param seq2: Another sequence of same length
     :return: Number of mismatched nucleotides between two sequences
     """
-    pairs = zip(seq1.sequence, seq2.sequence)
+    pairs = zip(seq1, seq2)
     return len([pair for pair in pairs if pair[0] != pair[1]])
 
 
