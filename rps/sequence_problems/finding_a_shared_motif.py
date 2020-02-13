@@ -3,10 +3,12 @@ Given: A collection of k (k≤100) DNA strings of length at most 1 kbp each in F
 Return: A longest common substring of the collection. (If multiple solutions exist, you may return any single
 solution.)
 """
+from typing import List
+
 import rps.io_manager as io
 
 
-def longest_substring(sequences):
+def longest_substring(sequences: List[str]) -> str:
     # checks if substring is in all sequences
     def is_common(sub):
         for seq in sequences:
