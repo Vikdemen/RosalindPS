@@ -1,6 +1,8 @@
 from __future__ import annotations
 from collections import Counter
+from itertools import takewhile
 from typing import Dict, Tuple, List
+from more_itertools import ichunked
 
 
 # class Sequence:
@@ -11,8 +13,8 @@ from typing import Dict, Tuple, List
 class NucleotideSequence:
     def __init__(self, sequence: str, tag="N/A"):
         """
-        :param sequence: str A sequence of nucleotides
-        :param tag: str Fasta tag, defaults to N/A
+        :param sequence:A sequence of nucleotides
+        :param tag:Fasta tag, defaults to N/A
         """
         self.sequence = sequence
         self.tag = tag
@@ -86,16 +88,19 @@ class Peptide:
 class RNA(NucleotideSequence):
 
     def translate_to_protein(self) -> Peptide:
-        peptide_seq = []
-        codons = [self.sequence[i:i + 3] for i in range(len(self.sequence))[::3]]
-        for codon in codons:
-            amino = GENETIC_CODE[codon]
-            if amino == 'X':
-                # stop codon
-                break
-            else:
-                peptide_seq.append(amino)
-        return Peptide(''.join(peptide_seq))
+        """
+        :return: Returns protein chain encoded by matrix RNA, using 1-letter notation.
+        Translating stops at stop-codon
+        """
+        # divide into 3-character strings
+        codons = map("".join, ichunked(self.sequence, 3))
+        # translate into aminoacids
+        peptide_seq = (GENETIC_CODE[codon] for codon in codons)
+        # transation stops when stop-codon is encountered
+        peptide_seq = takewhile(lambda amino: amino != 'X', peptide_seq)
+        # generator is joined into a string
+        peptide_seq = ''.join(peptide_seq)
+        return Peptide(peptide_seq)
 
     def splice(self, intron):
         spliced = self.sequence.replace(intron.sequence, "")
