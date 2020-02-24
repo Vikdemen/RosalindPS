@@ -26,15 +26,15 @@ def main():
     print(max_gc_content)
 
 
-def calculate_max_gc_content(unparsed: List[str]) -> Tuple[str, float]:
+def calculate_max_gc_content(fasta_sequences: List[str]) -> Tuple[str, float]:
     """
-    :param unparsed: - sequence_problems in FASTA format
+    :param fasta_sequences: - sequence_problems in FASTA format
     :return: the tag and gc content of DNA strand with highest GC content
     """
-    parsed = io.parse_fasta(unparsed)
+    parsed = io.parse_fasta(fasta_sequences)
     strands = [seq.DNA(sequence, tag) for sequence, tag in parsed]
     gc_content_values = [(strand.tag, strand.gc_content()) for strand in strands]
-    max_tag, max_gc_content = max(gc_content_values, key=lambda dna: dna.gc_content())
+    max_tag, max_gc_content = max(gc_content_values, key=lambda value: value[1])
     return max_tag, max_gc_content
 
 

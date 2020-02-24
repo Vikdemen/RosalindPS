@@ -74,11 +74,12 @@ class DNA(NucleotideSequence):
         new_sequence = ''.join(new_sequence)
         return DNA(new_sequence)
 
-    def gc_content(self):
-        bases = self.count_bases()
+    def gc_content(self) -> float:
+        bases: Dict[str, int] = self.count_bases()
         c = bases['C']
         g = bases['G']
-        gc = (g + c) / sum(bases) * 100
+        total = sum(bases.values())
+        gc = (g + c) / total * 100
         return gc
 
     def search_for_motif(self, motif: str) -> List[int]:
