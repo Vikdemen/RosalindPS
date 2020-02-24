@@ -96,6 +96,24 @@ class DNA(NucleotideSequence):
                 positions.append(result + 1)
         return positions
 
+    def search_for_orf(self) -> List[DNA]:
+        def get_frames(strand: DNA, orfs: List[str]):
+            start_codon_positions = strand.search_for_motif('ATG')
+            for p in start_codon_positions:
+                # positions are 1-based
+                frame = strand.sequence[p - 1:]
+                assert frame.startswith('ATG')
+                codons_in_frame = set(map("".join, ichunked(frame, 3)))
+                # only stop-codons aligned in frame work
+                if 'TAG' in codons_in_frame or 'TGA' in codons_in_frame or 'TAA' in codons_in_frame:
+                    orfs.append(frame)
+
+        open_reading_frames = []
+        get_frames(self, open_reading_frames)
+        get_frames(self.reverse_complement(), open_reading_frames)
+        orf_strands = [DNA(seq) for seq in open_reading_frames]
+        return orf_strands
+
 
 class Peptide:
     def __init__(self, sequence: str):
