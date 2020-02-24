@@ -23,14 +23,15 @@ sequences = [sequence[0] for sequence in parsed]
 
 
 def test_get_profile_matrix():
-    result = problem.get_profile_matrix(sequences)
-    expected_matrix = {
-        'A': [5, 1, 0, 0, 5, 5, 0, 0],
-        'C': [0, 0, 1, 4, 2, 0, 6, 1],
-        'G': [1, 1, 6, 3, 0, 1, 0, 0],
-        'T': [1, 5, 0, 0, 0, 1, 1, 6]
-    }
-    assert result == expected_matrix
+    profile_matrix = problem.get_profile_matrix(sequences)
+    expected_a = [5, 1, 0, 0, 5, 5, 0, 0]
+    expected_c = [0, 0, 1, 4, 2, 0, 6, 1]
+    expected_g = [1, 1, 6, 3, 0, 1, 0, 0]
+    expected_t = [1, 5, 0, 0, 0, 1, 1, 6]
+    assert profile_matrix.A == expected_a
+    assert profile_matrix.C == expected_c
+    assert profile_matrix.G == expected_g
+    assert profile_matrix.T == expected_t
 
 
 def test_get_consensus_string():
