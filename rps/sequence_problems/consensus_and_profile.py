@@ -4,7 +4,7 @@ Given: A collection of at most 10 DNA strings of equal length (at most 1 kbp) in
 Return: A consensus string and profile matrix for the collection. (If several possible consensus strings exist,
 then you may return any one of them.)
 """
-from typing import List, Dict
+from typing import List
 import rps.io_manager as io
 from collections import namedtuple
 
@@ -24,10 +24,10 @@ def get_profile_matrix(sequences: List[str]):
     assert all((len(seq) == sequence_length for seq in sequences))
     # list of counts are initially filled with zeros
     matrix = ProfileMatrix(
-        [0 for i in range(sequence_length)],
-        [0 for i in range(sequence_length)],
-        [0 for i in range(sequence_length)],
-        [0 for i in range(sequence_length)]
+        [0 for _ in range(sequence_length)],
+        [0 for _ in range(sequence_length)],
+        [0 for _ in range(sequence_length)],
+        [0 for _ in range(sequence_length)]
     )
     for sequence in sequences:
         for i, base in enumerate(sequence):

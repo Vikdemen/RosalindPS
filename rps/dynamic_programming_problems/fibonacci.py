@@ -30,6 +30,7 @@ def count_mortal_rabbits(time: int, lifespan: int) -> int:
     We consider that in that problem there is only 1 child pair in litter
     """
     # returning 0 when time <= 0 gives wrong results
+    # noinspection PyDeepBugsBinOperand
     if time <= 2:
         return 1
     else:

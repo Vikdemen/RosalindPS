@@ -71,5 +71,5 @@ def mating_probability(gen_1: Locus, gen_2: Locus, counts: Dict[Locus, int]):
     if gen_1 == gen_2:
         mother -= 1
     # we assume you can't mate with yourself
-    probability = father/total * mother / (total - 1)
+    probability = father / total * mother / (total - 1)
     return probability
