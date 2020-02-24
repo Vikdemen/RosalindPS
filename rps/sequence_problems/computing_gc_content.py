@@ -16,7 +16,7 @@ absolute error below.
 """
 from typing import List, Tuple
 import rps.io_manager as io
-import rps.sequences as seq
+import rps.sequence_problems.sequences as seq
 
 
 def main():

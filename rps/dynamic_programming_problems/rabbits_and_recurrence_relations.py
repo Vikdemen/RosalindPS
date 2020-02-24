@@ -1,7 +1,7 @@
 """
 Calculates number of rabbit pairs after n months given k rabbits in a litter
 """
-import rps.dynamic_programming.fibonacci as fib
+import rps.dynamic_programming_problems.fibonacci as fib
 
 
 def main():

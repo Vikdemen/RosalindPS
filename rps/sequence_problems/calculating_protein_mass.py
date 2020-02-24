@@ -6,7 +6,7 @@ the corresponding amino acid.
 Given: A protein string P of length at most 1000 aa.
 Return: The total weight of P. Consult the monoisotopic mass table.
 """
-import rps.sequences as seq
+import rps.sequence_problems.sequences as seq
 import rps.io_manager as io
 
 

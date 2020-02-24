@@ -1,4 +1,4 @@
-from rps.dynamic_programming import fibonacci as fib
+from rps.dynamic_programming_problems import fibonacci as fib
 
 
 def test_mortal_rabbits():

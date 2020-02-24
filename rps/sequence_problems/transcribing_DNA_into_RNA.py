@@ -5,7 +5,7 @@ occurrences of 'T' in t with 'U' in u.
 Given: A DNA string t having length at most 1000 nt.
 Return: The transcribed RNA string of t.
 """
-import rps.sequences as seq
+import rps.sequence_problems.sequences as seq
 
 
 def main():

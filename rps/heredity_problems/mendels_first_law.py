@@ -7,7 +7,7 @@ allele (and thus displaying the dominant phenotype). Assume that any two organis
 
 from __future__ import annotations
 
-from rps.heredity.mendel import Locus, calculate_dominant_probabilities
+from rps.heredity_problems.mendel import Locus, calculate_dominant_probabilities
 
 
 def main():

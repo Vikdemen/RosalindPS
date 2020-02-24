@@ -4,7 +4,7 @@ Return: Four integers (separated by spaces) counting the respective number of ti
 and 'T' occur in s.
 """
 from typing import Tuple
-import rps.sequences as seq
+import rps.sequence_problems.sequences as seq
 
 
 def main():

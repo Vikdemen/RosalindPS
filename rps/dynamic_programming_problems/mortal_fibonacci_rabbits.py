@@ -1,4 +1,4 @@
-import rps.dynamic_programming.fibonacci as fib
+import rps.dynamic_programming_problems.fibonacci as fib
 
 
 def main():

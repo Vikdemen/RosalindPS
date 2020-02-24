@@ -26,6 +26,16 @@ class NucleotideSequence:
         counts = Counter(self.sequence)
         return counts
 
+    def calculate_hamming_distance(self, another: NucleotideSequence) -> int:
+        """
+        :param another: Another sequence of same length
+        :return: Number of mismatched nucleotides between two sequences
+        """
+        if len(self.sequence) != len(another.sequence):
+            raise ValueError("Sequences are of different length")
+        pairs = zip(self.sequence, another.sequence)
+        return len([pair for pair in pairs if pair[0] != pair[1]])
+
 
 class DNA(NucleotideSequence):
     COMPLEMENTARY_BASES = {"A": "T", "T": "A", "G": "C", "C": "G"}
@@ -71,6 +81,21 @@ class DNA(NucleotideSequence):
         gc = (g + c) / sum(bases) * 100
         return gc
 
+    def search_for_motif(self, motif: str) -> List[int]:
+        if len(motif) > len(self.sequence):
+            raise ValueError("Motif is larger than a whole sequence")
+        positions = []
+        start = 0
+        while True:
+            result = self.sequence.find(motif, start)
+            if result == -1:
+                break
+            else:
+                start = result + 1
+                # we need to use 1-based numbering
+                positions.append(result + 1)
+        return positions
+
 
 class Peptide:
     def __init__(self, sequence: str):
@@ -105,32 +130,6 @@ class RNA(NucleotideSequence):
     def splice(self, intron):
         spliced = self.sequence.replace(intron.sequence, "")
         return RNA(spliced, self.tag)
-
-
-def calculate_hamming_distance(seq1: str, seq2: str) -> int:
-    """
-    :param seq1: string, representing nucleotide sequence
-    :param seq2: Another sequence of same length
-    :return: Number of mismatched nucleotides between two sequences
-    """
-    pairs = zip(seq1, seq2)
-    return len([pair for pair in pairs if pair[0] != pair[1]])
-
-
-def search_for_motif(sequence: str, motif: str) -> List[int]:
-    if len(motif) > len(sequence):
-        raise ValueError("Motif is larger than a whole sequence")
-    positions = []
-    start = 0
-    while True:
-        result = sequence.find(motif, start)
-        if result == -1:
-            break
-        else:
-            start = result + 1
-            # we need to use 1-based numbering
-            positions.append(result + 1)
-    return positions
 
 
 # encoding of every aminoacid by 3-base RNA sequences

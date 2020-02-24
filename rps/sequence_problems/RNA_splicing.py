@@ -8,7 +8,7 @@ exist for the dataset provided.)
 """
 from typing import List
 import rps.io_manager as io
-import rps.sequences as seq
+import rps.sequence_problems.sequences as seq
 
 
 def main():

@@ -6,7 +6,7 @@ most 1000 bp. Return: The reverse complement sc of s.
 """
 
 
-import rps.sequences as seq
+import rps.sequence_problems.sequences as seq
 
 
 def main():
