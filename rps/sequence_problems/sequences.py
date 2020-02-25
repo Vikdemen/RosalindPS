@@ -5,11 +5,6 @@ from typing import Dict, Tuple, List
 from more_itertools import ichunked
 
 
-# class Sequence:
-# def __init__(self, sequence):
-# self.sequence = sequence
-
-
 class NucleotideSequence:
     def __init__(self, sequence: str, tag="N/A"):
         """
@@ -64,7 +59,7 @@ class DNA(NucleotideSequence):
         :return: RNA strand with the same direction and thymine replaced with uracil
         """
         new_sequence = self.sequence.replace('T', 'U')
-        return RNA(new_sequence)
+        return RNA(new_sequence, self.tag)
 
     def reverse_complement(self) -> DNA:
         """
@@ -82,7 +77,12 @@ class DNA(NucleotideSequence):
         gc = (g + c) / total * 100
         return gc
 
-    def search_for_motif(self, motif: str) -> List[int]:
+    def search_for_motif(self, motif: str, base: int = 1) -> List[int]:
+        """
+        :param motif: A substring to search in sequence
+        :param base: 0- or 1- based numbering, 1 is default.
+        :return: A list of overlapping occurences of given substring in sequence
+        """
         if len(motif) > len(self.sequence):
             raise ValueError("Motif is larger than a whole sequence")
         positions = []
@@ -93,16 +93,15 @@ class DNA(NucleotideSequence):
                 break
             else:
                 start = result + 1
-                # we need to use 1-based numbering
-                positions.append(result + 1)
+                # uses 1-based position or 0-based index
+                positions.append(result + base)
         return positions
 
     def search_for_orf(self) -> List[DNA]:
         def get_frames(strand: DNA, orfs: List[str]):
-            start_codon_positions = strand.search_for_motif('ATG')
+            start_codon_positions = strand.search_for_motif('ATG', base=0)
             for p in start_codon_positions:
-                # positions are 1-based
-                frame = strand.sequence[p - 1:]
+                frame = strand.sequence[p:]
                 assert frame.startswith('ATG')
                 codons_in_frame = set(map("".join, ichunked(frame, 3)))
                 # only stop-codons aligned in frame work
@@ -144,9 +143,14 @@ class RNA(NucleotideSequence):
         peptide_seq = takewhile(lambda amino: amino != 'X', peptide_seq)
         # generator is joined into a string
         peptide_seq = ''.join(peptide_seq)
-        return Peptide(peptide_seq)
+        protein = Peptide(peptide_seq)
+        return protein
 
-    def splice(self, intron):
+    def splice(self, intron: RNA) -> RNA:
+        """
+        :param intron: Another RNA sequence representing intron
+        :return: New RNA sequence with intron cut out
+        """
         spliced = self.sequence.replace(intron.sequence, "")
         return RNA(spliced, self.tag)
 
