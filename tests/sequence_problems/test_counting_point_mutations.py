@@ -1,4 +1,4 @@
-from rps.sequence_problems.counting_point_mutations import get_hamming_distance
+from src.rps.sequence_problems.counting_point_mutations import get_hamming_distance
 
 
 def test_calculate_hamming_distance():

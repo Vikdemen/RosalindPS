@@ -1,4 +1,4 @@
-from rps.sequence_problems.transitions_and_transversions import calculate_tt_ratio
+from src.rps.sequence_problems.transitions_and_transversions import calculate_tt_ratio
 from pytest import approx
 
 

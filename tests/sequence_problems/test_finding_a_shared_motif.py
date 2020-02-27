@@ -1,4 +1,4 @@
-from rps.sequence_problems.finding_a_shared_motif import longest_substring
+from src.rps.sequence_problems.finding_a_shared_motif import longest_substring
 
 
 def test_longest_substring():

@@ -1,4 +1,4 @@
-from rps.sequence_problems.translating_rna_into_protein import translate_dna
+from src.rps.sequence_problems.translating_rna_into_protein import translate_dna
 
 
 def test_translate_dna():

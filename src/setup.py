@@ -9,5 +9,5 @@ setup(
     license='MIT License',
     author='Demenev Viktor',
     author_email='viktor.demen@gmail.com',
-    description='Rosalind problem solver'
+    description='Rosalind problem solver', install_requires=['pytest']
 )
