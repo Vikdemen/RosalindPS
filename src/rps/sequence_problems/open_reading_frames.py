@@ -1,10 +1,13 @@
 from typing import List
-from rps.io_manager import as_fasta
-from rps.sequence_problems.sequences import DNA
+from rps.io_manager import parse_fasta
 
 
-@as_fasta
-def get_possible_proteins(strands: List[DNA]) -> str:
+def get_possible_proteins(fasta_data: List[str]) -> str:
+    """
+    :param fasta_data: A DNA sequence in FASTA format
+    :return: a formatted set of possible proteins encoded in DNA
+    """
+    strands = parse_fasta(fasta_data)
     # there should be only one sequence
     strand, = strands
     orfs = strand.search_for_orf()

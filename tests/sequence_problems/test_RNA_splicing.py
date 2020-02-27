@@ -11,6 +11,5 @@ def test_splice_and_translate():
         "ATCGGTCGAGCGTGT"
     ]
     expected_protein = "MVYIADKQHVASREAYGHMFKVCA"
-    # noinspection PyTypeChecker
     protein = splice_and_translate(sample_data)
     assert protein == expected_protein

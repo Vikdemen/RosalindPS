@@ -6,11 +6,16 @@ from more_itertools import ichunked
 
 
 class NucleotideSequence:
+
+    valid_nucleotides = {'A', 'T', 'U', 'G', 'C'}
+
     def __init__(self, sequence: str, tag="N/A"):
         """
         :param sequence:A sequence of nucleotides
         :param tag:Fasta tag, defaults to N/A
         """
+        if any(char not in self.valid_nucleotides for char in sequence):
+            raise ValueError("Unexpected nucleotide encountered")
         self.sequence = sequence
         self.tag = tag
 
@@ -36,6 +41,7 @@ class DNA(NucleotideSequence):
     COMPLEMENTARY_BASES = {"A": "T", "T": "A", "G": "C", "C": "G"}
     purines = {'A', 'G'}
     pyrimidines = {'C', 'T'}
+    valid_nucleotides = {'A', 'T', 'G', 'C'}
 
     def transitions_transversions(self, other) -> Tuple[int, int]:
         if len(self.sequence) != len(other.sequence):
@@ -117,20 +123,9 @@ class DNA(NucleotideSequence):
         return orf_strands
 
 
-class Peptide:
-    def __init__(self, sequence: str):
-        self.sequence = sequence
-
-    def calculate_mass(self) -> float:
-        """
-        :return: Mass of peptide chain
-        Calculates the monoisotopic mass of protein chain, assuming it fully consists of AA residues.
-        """
-        mass = sum((AA_MASSES[amino] for amino in self.sequence))
-        return mass
-
-
 class RNA(NucleotideSequence):
+
+    valid_nucleotides = {'A', 'U', 'G', 'C'}
 
     def translate_to_protein(self) -> Peptide:
         """
@@ -155,6 +150,19 @@ class RNA(NucleotideSequence):
         """
         spliced = self.sequence.replace(intron.sequence, "")
         return RNA(spliced, self.tag)
+
+
+class Peptide:
+    def __init__(self, sequence: str):
+        self.sequence = sequence
+
+    def calculate_mass(self) -> float:
+        """
+        :return: Mass of peptide chain
+        Calculates the monoisotopic mass of protein chain, assuming it fully consists of AA residues.
+        """
+        mass = sum((AA_MASSES[amino] for amino in self.sequence))
+        return mass
 
 
 # encoding of every aminoacid by 3-base RNA sequences

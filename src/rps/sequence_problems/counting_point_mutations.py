@@ -14,8 +14,6 @@ def get_hamming_distance(sequences: List[str]) -> int:
     :param sequences: Two sequences of equal length DNA strands
     :return: A number of mismatched nucleotides between them
     """
-    if len(sequences) != 2:
-        raise ValueError("There must be 2 sequences to compare")
     seq1, seq2 = sequences
     strand1 = DNA(seq1)
     strand2 = DNA(seq2)

@@ -4,16 +4,15 @@ Return: A longest common substring of the collection. (If multiple solutions exi
 solution.)
 """
 from typing import List
-from rps.io_manager import as_fasta
-from rps.sequence_problems.sequences import DNA
+from rps.io_manager import parse_fasta
 
 
-@as_fasta
-def longest_substring(strands: List[DNA]) -> str:
+def longest_substring(fasta_data: List[str]) -> str:
     """
-    :param strands: Several DNA strands
+    :param fasta_data: Several DNA sequences in FASTA format
     :return: Any of the longest substrings that are subsequences of every strand
     """
+    strands = parse_fasta(fasta_data)
     sequences = [strand.sequence for strand in strands]
 
     # checks if substring is in all sequences

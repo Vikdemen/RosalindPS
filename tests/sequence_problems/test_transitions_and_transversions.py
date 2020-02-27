@@ -11,7 +11,6 @@ def test_calculate_tt_ratio():
         "TTATCTGACAAAGAAAGCCGTCAACGGCTGGATAATTTCGCGATCGTGCTGGTTACTGGC",
         "GGTACGAGTGTTCCTTTGGGT"
     ]
-    # noinspection PyTypeChecker
     ratio = calculate_tt_ratio(sample_sequences)
     expected_ratio = 1.2143
     assert ratio == approx(expected_ratio)

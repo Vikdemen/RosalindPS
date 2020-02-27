@@ -7,16 +7,15 @@ Return: A protein string resulting from transcribing and translating the exons o
 exist for the dataset provided.)
 """
 from typing import List
-from rps.io_manager import as_fasta
-from rps.sequence_problems.sequences import DNA
+from rps.io_manager import parse_fasta
 
 
-@as_fasta
-def splice_and_translate(dna_strands: List[DNA]) -> str:
+def splice_and_translate(fasta_data: List[str]) -> str:
     """
-    :param dna_strands: A DNA sequence of gene, followed by several intron sequences
+    :param fasta_data: A DNA sequence of gene, followed by several intron sequences, in FASTA format
     :return: A protein sequence obtained after translating spliced RNA
     """
+    dna_strands = parse_fasta(fasta_data)
     # sequences are DNA, so we need to transcribe them
     rna_strands = [strand.transcribe() for strand in dna_strands]
     # first sequence is

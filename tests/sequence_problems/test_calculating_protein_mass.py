@@ -9,6 +9,5 @@ def test_calculate_protein_mass():
     """
     sample_sequence = ['SKADYEK']
     expected_mass = 821.392
-    # noinspection PyTypeChecker
     protein_mass = calculate_mass(sample_sequence)
     assert protein_mass == approx(expected_mass)

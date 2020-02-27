@@ -1,7 +1,7 @@
 import argparse
 import sys
 
-from typing import List
+from rps.io_manager import get_data
 from rps.sequence_problems.counting_dna_nucleotides import count_nucleotides
 from rps.sequence_problems.calculating_protein_mass import calculate_mass
 from rps.sequence_problems.complementing_a_strand_of_dna import complement_dna
@@ -40,12 +40,6 @@ def solve_problem(name, data):
     action = PROBLEMS[name]
     result = action(data)
     return result
-
-
-def get_data(filepath) -> List[str]:
-    with open(filepath, 'r') as file:
-        data = [line.strip('\n') for line in file.readlines()]
-    return data
 
 
 def print_result(result):

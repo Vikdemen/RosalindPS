@@ -20,7 +20,6 @@ def test_calculate_max_gc_content():
     ]
     tag: str
     content: float
-    # noinspection PyTypeChecker
     tag, content = calculate_max_gc_content(sample_data)
     expected_tag = "Rosalind_0808"
     expected_content = 60.919540

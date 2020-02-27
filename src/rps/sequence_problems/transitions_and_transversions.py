@@ -8,16 +8,15 @@ Return: The transition/transversion ratio R(s1,s2).
 
 from typing import List
 
-from rps.io_manager import as_fasta
-from rps.sequence_problems.sequences import DNA
+from rps.io_manager import parse_fasta
 
 
-@as_fasta
-def calculate_tt_ratio(strands: List[DNA]) -> float:
+def calculate_tt_ratio(fasta_data: List[str]) -> float:
     """
-    :param strands: Two equal length DNA strands
-    :return: Transition/transversion ratio
+    :param fasta_data: Two equal length DNA sequences in FASTA format
+    :return: Transition/transversion ratio, rounded to 4th digit
     """
+    strands = parse_fasta(fasta_data)
     first, second = strands
     transitions, transversions = first.transitions_transversions(second)
     tt_ratio = transitions / transversions

@@ -11,7 +11,6 @@ def test_longest_substring():
         "ATACA"
     ]
     expected_substring = "AC"
-    # noinspection PyTypeChecker
     longest = longest_substring(sample_data)
     # there may be several substrings of same length
     assert len(longest) == len(expected_substring)

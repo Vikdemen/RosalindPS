@@ -6,16 +6,18 @@ the corresponding amino acid.
 Given: A protein string P of length at most 1000 aa.
 Return: The total weight of P. Consult the monoisotopic mass table.
 """
+from typing import List
+
 import rps.sequence_problems.sequences as seq
-from rps.io_manager import single_line
 
 
-@single_line
-def calculate_mass(peptide_sequence: str) -> float:
+def calculate_mass(lines: List[str]) -> float:
     """
-    :param peptide_sequence: a sequence of aminoacids in the form of the string using 1-letter notation
+    :param lines: a sequence of aminoacids in the form of the string using 1-letter notation
     :return: Monoisotopic mass of peptide chain with a given sequence of residues
     """
+    # only one sequence is expected
+    peptide_sequence, = lines
     peptide = seq.Peptide(peptide_sequence)
     mass = peptide.calculate_mass()
     return round(mass, 4)

@@ -7,6 +7,5 @@ def test_complement_dna():
     """
     sequence = ["AAAACCCGGT"]
     expected_complement = "ACCGGGTTTT"
-    # noinspection PyTypeChecker
     complement = complement_dna(sequence)
     assert complement == expected_complement
