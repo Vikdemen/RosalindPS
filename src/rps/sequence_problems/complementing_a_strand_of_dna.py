@@ -6,7 +6,7 @@ most 1000 bp. Return: The reverse complement sc of s.
 """
 
 
-import rps.sequence_problems.sequences as seq
+from rps.sequence_problems.sequences import DNA
 
 
 def main():

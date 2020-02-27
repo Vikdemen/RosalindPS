@@ -1,2 +1,2 @@
-Pytest
+pytest
 more-itertools

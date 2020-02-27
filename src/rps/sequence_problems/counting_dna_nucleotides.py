@@ -14,6 +14,7 @@ def main():
     dna_sequence = input("Enter DNA sequence \n")
     counts = count_nucleotides(dna_sequence)
     print(counts)
+    # TODO - fix list vs str
 
 
 def count_nucleotides(dna_sequences: List[str]) -> Tuple[int, int, int, int]:

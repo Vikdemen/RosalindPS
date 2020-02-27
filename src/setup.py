@@ -12,7 +12,7 @@ setup(
     author_email='viktor.demen@gmail.com',
     description='A simple tool for solving Rosalind problems',
     classifiers=['Programming Language :: Python :: 3'],
-    keywords='bioinformatics practice'
+    keywords='bioinformatics practice', install_requires=['pytest']
 )
 
 

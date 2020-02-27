@@ -26,14 +26,14 @@ def get_data(filepath) -> List[str]:
     return data
 
 
-def print_result(output: sys.path, result):
+def print_result(result):
     print(result)
 
 
 def main():
     args = parse_arguments()
     result = solve_problem(args.problem, data=get_data(args.input.name))
-    print_result(args.output, result)
+    print_result(result)
 
 
 def parse_arguments():
