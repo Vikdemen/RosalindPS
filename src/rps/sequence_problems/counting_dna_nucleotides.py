@@ -3,8 +3,8 @@ Given: A DNA string s of length at most 1000 nt.
 Return: Four integers (separated by spaces) counting the respective number of times that the symbols 'A', 'C', 'G',
 and 'T' occur in s.
 """
-from typing import Tuple
-import rps.sequence_problems.sequences as seq
+from typing import Tuple, List
+from rps.sequence_problems.sequences import DNA
 
 
 def main():
@@ -16,12 +16,15 @@ def main():
     print(counts)
 
 
-def count_nucleotides(dna_sequence: str) -> Tuple[int, int, int, int]:
+def count_nucleotides(dna_sequences: List[str]) -> Tuple[int, int, int, int]:
     """
-    :param dna_sequence: A string represeting the sequence of nucleotides
+    :param dna_sequences: A list of strings represeting the sequence of nucleotides
     :return: Four integers - respective number of A, C, G and T nucleotides in input
     """
-    dna_strand = seq.DNA(dna_sequence)
+    for seq in dna_sequences:
+        seq.strip('/n')
+    dna_sequence = ''.join(dna_sequences)
+    dna_strand = DNA(dna_sequence)
     counts = dna_strand.count_bases()
     return counts['A'], counts['C'], counts['G'], counts['T']
 

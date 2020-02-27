@@ -20,7 +20,7 @@ def complement_dna(dna_sequence: str) -> str:
     :param dna_sequence: a string of ATGC
     :return: str, reversed RNA sequence
     """
-    dna = seq.DNA(dna_sequence)
+    dna = DNA(dna_sequence)
     reverse_complement = dna.reverse_complement()
     return reverse_complement.sequence
 
