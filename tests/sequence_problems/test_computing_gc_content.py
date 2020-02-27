@@ -1,4 +1,4 @@
-from src.rps.sequence_problems.computing_gc_content import calculate_max_gc_content
+from rps.sequence_problems.computing_gc_content import calculate_max_gc_content
 from pytest import approx
 
 

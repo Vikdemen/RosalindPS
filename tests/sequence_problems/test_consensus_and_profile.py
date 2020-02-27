@@ -1,5 +1,5 @@
-from src.rps.sequence_problems.parsing import parse_fasta
-import src.rps.sequence_problems.consensus_and_profile as problem
+from parsing import parse_fasta
+import rps.sequence_problems.consensus_and_profile as problem
 
 dataset = [
     ">Rosalind_1",

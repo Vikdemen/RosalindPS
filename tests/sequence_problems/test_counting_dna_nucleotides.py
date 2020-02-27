@@ -1,4 +1,4 @@
-from src.rps.sequence_problems.counting_dna_nucleotides import count_nucleotides
+from rps.sequence_problems.counting_dna_nucleotides import count_nucleotides
 
 
 def test_count_dna_nucleotides():

@@ -1,4 +1,4 @@
-import src.rps.sequence_problems.sequences as seq
+import rps.sequence_problems.sequences as seq
 
 
 def test_sequence_creation():

@@ -1,5 +1,5 @@
 from pytest import approx
-from src.rps.sequence_problems.calculating_protein_mass import calculate_mass
+from rps.sequence_problems.calculating_protein_mass import calculate_mass
 
 
 def test_calculate_protein_mass():

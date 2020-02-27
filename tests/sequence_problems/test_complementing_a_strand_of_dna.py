@@ -1,4 +1,4 @@
-from src.rps.sequence_problems.complementing_a_strand_of_dna import complement_dna
+from rps.sequence_problems.complementing_a_strand_of_dna import complement_dna
 
 
 def test_complement_dna():

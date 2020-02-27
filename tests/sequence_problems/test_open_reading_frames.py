@@ -1,4 +1,4 @@
-from src.rps.sequence_problems.open_reading_frames import get_possible_proteins
+from rps.sequence_problems.open_reading_frames import get_possible_proteins
 
 
 def test_get_possible_proteins():

@@ -1,4 +1,4 @@
-from src.rps.sequence_problems.finding_a_motif_in_dna import get_motif_positions
+from rps.sequence_problems.finding_a_motif_in_dna import get_motif_positions
 
 
 def test_finding_motif_in_dna():
