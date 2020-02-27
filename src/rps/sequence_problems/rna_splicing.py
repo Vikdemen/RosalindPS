@@ -7,7 +7,7 @@ Return: A protein string resulting from transcribing and translating the exons o
 exist for the dataset provided.)
 """
 from typing import List
-from parsing import parse_fasta
+from rps.sequence_problems.parsing import parse_fasta
 
 
 def splice_and_translate(fasta_data: List[str]) -> str:

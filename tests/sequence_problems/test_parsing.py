@@ -1,4 +1,4 @@
-from parsing import parse_fasta
+from rps.sequence_problems.parsing import parse_fasta
 
 
 def test_parse_fasta():

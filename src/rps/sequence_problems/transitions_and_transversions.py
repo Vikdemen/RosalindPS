@@ -8,7 +8,7 @@ Return: The transition/transversion ratio R(s1,s2).
 
 from typing import List
 
-from parsing import parse_fasta
+from rps.sequence_problems.parsing import parse_fasta
 
 
 def calculate_tt_ratio(fasta_data: List[str]) -> float:

@@ -1,4 +1,4 @@
-from parsing import parse_fasta
+from rps.sequence_problems.parsing import parse_fasta
 import rps.sequence_problems.consensus_and_profile as problem
 
 dataset = [
