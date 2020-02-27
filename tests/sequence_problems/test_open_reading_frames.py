@@ -7,5 +7,7 @@ def test_get_possible_proteins():
         "AGCCATGTAGCTAACTCAGGTTACATGGGGATGACCCCGCGACTTGGATTAGAGTCTCTTTTGGAATAAGCCTGAATGATCCGAGTAGCATCTCAG"
     ]
     expected_proteins = {"MLLGSFRLIPKETLIQVAGSSPCNLS", "M", "MGMTPRLGLESLLE", "MTPRLGLESLLE"}
+    # noinspection PyTypeChecker
     translated_proteins = get_possible_proteins(fasta_sequences)
+    translated_proteins = set(translated_proteins.split('\n'))
     assert translated_proteins == expected_proteins

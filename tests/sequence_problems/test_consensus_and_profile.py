@@ -18,8 +18,7 @@ dataset = [
     "ATGGCACT"
 ]
 
-parsed = io.parse_fasta(dataset)
-sequences = [sequence[0] for sequence in parsed]
+sequences = io.parse_fasta(dataset)
 
 
 def test_get_profile_matrix():

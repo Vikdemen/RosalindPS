@@ -5,7 +5,8 @@ def test_complement_dna():
     """
     Checks if the function returns proper reverse complement
     """
-    sequence = "AAAACCCGGT"
+    sequence = ["AAAACCCGGT"]
     expected_complement = "ACCGGGTTTT"
+    # noinspection PyTypeChecker
     complement = complement_dna(sequence)
     assert complement == expected_complement

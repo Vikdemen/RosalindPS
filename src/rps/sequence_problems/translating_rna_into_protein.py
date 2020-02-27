@@ -7,20 +7,11 @@ Given: An RNA string s corresponding to a strand of mRNA (of length at most 10 k
 Return: The protein string encoded by s.
 """
 import rps.sequence_problems.sequences as seq
-import rps.io_manager as file
+from rps.io_manager import single_line
 
 
-def main():
-    rna_sequence = file.read_file('input.txt')[0]
-    translated = translate_dna(rna_sequence)
-    print(translated)
-
-
+@single_line
 def translate_dna(sequence: str) -> str:
     rna = seq.RNA(sequence)
     protein = rna.translate_to_protein()
     return protein.sequence
-
-
-if __name__ == '__main__':
-    main()

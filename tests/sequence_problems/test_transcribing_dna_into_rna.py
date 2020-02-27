@@ -1,4 +1,4 @@
-from rps.sequence_problems.transcribing_DNA_into_RNA import transcribe
+from rps.sequence_problems.transcribing_dna_into_rna import transcribe
 
 
 def test_transcribe():

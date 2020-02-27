@@ -7,4 +7,5 @@ def test_count_dna_nucleotides():
     """
     sequence = ['AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC']
     output = (20, 12, 17, 21)
+    # noinspection PyTypeChecker
     assert count_nucleotides(sequence) == output

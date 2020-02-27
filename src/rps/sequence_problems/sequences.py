@@ -38,6 +38,8 @@ class DNA(NucleotideSequence):
     pyrimidines = {'C', 'T'}
 
     def transitions_transversions(self, other) -> Tuple[int, int]:
+        if len(self.sequence) != len(other.sequence):
+            raise ValueError("Sequences must be of equal length")
         transitions = 0
         transversions = 0
         for b1, b2 in zip(self.sequence, other.sequence):
