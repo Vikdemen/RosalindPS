@@ -5,7 +5,7 @@ Return: A consensus string and profile matrix for the collection. (If several po
 then you may return any one of them.)
 """
 from typing import List
-from rps.io_manager import parse_fasta
+from parsing import parse_fasta
 from rps.sequence_problems.sequences import DNA
 from collections import namedtuple
 

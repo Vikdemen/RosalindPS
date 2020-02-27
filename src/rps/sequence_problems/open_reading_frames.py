@@ -1,5 +1,5 @@
 from typing import List
-from rps.io_manager import parse_fasta
+from parsing import parse_fasta
 
 
 def get_possible_proteins(fasta_data: List[str]) -> str:

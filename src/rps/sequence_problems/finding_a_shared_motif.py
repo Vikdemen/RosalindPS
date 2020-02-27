@@ -4,7 +4,7 @@ Return: A longest common substring of the collection. (If multiple solutions exi
 solution.)
 """
 from typing import List
-from rps.io_manager import parse_fasta
+from parsing import parse_fasta
 
 
 def longest_substring(fasta_data: List[str]) -> str:

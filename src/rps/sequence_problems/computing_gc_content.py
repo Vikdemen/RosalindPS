@@ -15,7 +15,7 @@ allows for a default error of 0.001 in all decimal answers unless otherwise stat
 absolute error below.
 """
 from typing import List, Tuple
-from rps.io_manager import parse_fasta
+from parsing import parse_fasta
 
 
 def calculate_max_gc_content(fasta_data: List[str]) -> Tuple[str, float]:

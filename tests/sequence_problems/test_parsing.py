@@ -1,4 +1,4 @@
-from rps.io_manager import parse_fasta
+from parsing import parse_fasta
 
 
 def test_parse_fasta():
