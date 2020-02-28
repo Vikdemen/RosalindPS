@@ -1,6 +1,6 @@
 from typing import List
 
-from sequences import DNA
+from rps.sequence_problems.sequences import DNA
 
 
 def parse_fasta(data: List[str]) -> List[DNA]:
