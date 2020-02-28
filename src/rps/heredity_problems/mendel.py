@@ -42,18 +42,21 @@ def offspring_chance(father: Locus, mother: Locus, child: Locus) -> float:
     return chance
 
 
-def calculate_dominant_probabilities(counts: Dict[Locus, int]) -> float:
+def calculate_dominant_probabilities(dominant: int, heterozygous: int, recessive: int) -> float:
     """
-    :param counts: how many creaturs of each genotype is in the pool
+    :param dominant: Number of homozygous dominant organisms
+    :param heterozygous: Number of heterozygous organisms
+    :param recessive: Number of homozygous recessive organisms
     :return: Total probability to get offspring with dominant allele after random mating
     """
+    counts = {Locus.dom: dominant, Locus.het: heterozygous, Locus.rec: recessive}
     mating_probabilities = mating_combinations(counts).items()
     probability_sum = 0
     for pair, prob in mating_probabilities:
         gen1, gen2 = pair
         variants: Dict[Locus, float] = Locus.mate(gen1, gen2)
         probability_sum += (variants[Locus.het] + variants[Locus.dom]) * prob
-    # it.s probability
+    # probability is always between 0 and 1
     assert 0 <= probability_sum <= 1
     return probability_sum
 

@@ -4,19 +4,18 @@ are homozygous dominant for a factor, m are heterozygous, and n are homozygous r
 Return: The probability that two randomly selected mating organisms will produce an individual possessing a dominant
 allele (and thus displaying the dominant phenotype). Assume that any two organisms can mate.
 """
-
 from __future__ import annotations
-
-from rps.heredity_problems.mendel import Locus, calculate_dominant_probabilities
-
-
-def main():
-    genotype_counts = {Locus.dom: int(input("Number of dominants (k) is ")),
-                       Locus.het: int(input("Number of heterozygous (m) is ")),
-                       Locus.rec: int(input("Number of recessive(n) is "))}
-    dominant = calculate_dominant_probabilities(genotype_counts)
-    print(round(dominant, 5))
+from typing import List
+from rps.heredity_problems.mendel import calculate_dominant_probabilities
 
 
-if __name__ == '__main__':
-    main()
+def probability_of_dominants(lines: List[str]):
+    """
+    :param lines: A single line with 3 space-separated numbers representing number of organism with dominant homozygous,
+    heterozygous and recessive homozygous
+    :return: The probability of offspring with dominant allele from 2 random parents
+    """
+    line, = lines
+    k, m, n = [int(num) for num in line.split()]
+    dominant = calculate_dominant_probabilities(k, m, n)
+    return f"{round(dominant, 5)}"

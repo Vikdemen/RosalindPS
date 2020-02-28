@@ -13,15 +13,18 @@ aa-aa
 Return: The expected number of offspring displaying the dominant phenotype in the
 next generation, under the assumption that every couple has exactly two offspring.
 """
+from typing import List
+
 import rps.heredity_problems.mendel as md
 
 
-def main():
+def expected_dominant_offspring(lines: List[str]) -> float:
+    line, = lines
+    counts = [int(num) for num in line.split()]
     dom = md.Locus.dom
     het = md.Locus.het
     rec = md.Locus.rec
     offspring_number = 2
-    counts = list(map(int, (input("number of couples is ").split())))
     couples = {(dom, dom): counts[0], (dom, het): counts[1], (dom, rec): counts[2], (het, het): counts[3],
                (het, rec): counts[4], (rec, rec): counts[5]}
     total_dominant = 0
@@ -30,8 +33,4 @@ def main():
         probabilities = md.Locus.mate(father, mother)
         dominant_probability = probabilities[dom] + probabilities[het]
         total_dominant += offspring_number * dominant_probability * number
-    print(total_dominant)
-
-
-if __name__ == '__main__':
-    main()
+    return total_dominant

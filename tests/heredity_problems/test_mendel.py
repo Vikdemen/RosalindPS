@@ -33,3 +33,4 @@ def test_offspring_chance(father, mother, child, probability):
 #             assert probability == counts[father] / total * (counts[father] - 1) / (total - 1)
 #         else:
 #             assert probability == counts[father] / total * counts[mother] / total
+# TODO - fix test

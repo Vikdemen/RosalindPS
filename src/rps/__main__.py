@@ -19,6 +19,9 @@ from rps.sequence_problems.translating_rna_into_protein import translate_dna
 from rps.dynamic_programming_problems.rabbits_and_recurrence_relations import count_rabbits
 from rps.dynamic_programming_problems.mortal_fibonacci_rabbits import count_mortal_rabbits
 
+from rps.heredity_problems.mendels_first_law import calculate_dominant_probabilities
+from rps.heredity_problems.calculating_expected_offspring import expected_dominant_offspring
+
 PROBLEMS = {
     "calculating-protein-mass": calculate_mass,
     "counting-dna-nucleotides": count_nucleotides,
@@ -34,7 +37,9 @@ PROBLEMS = {
     "transitions-and-transversions": calculate_tt_ratio,
     "translating-rna-into-protein": translate_dna,
     "rabbits-and-recurrence-relations": count_rabbits,
-    "mortal-fibonacci-rabbits": count_mortal_rabbits
+    "mortal-fibonacci-rabbits": count_mortal_rabbits,
+    "mendels-first-law": calculate_dominant_probabilities,
+    "calculating-expected-offsprint": expected_dominant_offspring
 }
 
 
@@ -43,7 +48,7 @@ PROBLEMS = {
 
 def main():
     problem, input_file, output_file = parse_arguments()
-    result = solve_problem(problem, data=get_data(input_file.name))
+    result = solve_problem(problem, data=get_data(input_file))
     print_result(result, output_file)
 
 
@@ -51,7 +56,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description="Solver for rosalind problems")
     parser.add_argument("problem", help="Choose which problem to solve", choices=PROBLEMS.keys())
     parser.add_argument('input', nargs='?', type=argparse.FileType('r'), default=sys.stdin)
-    parser.add_argument('output', nargs='?', type=argparse.FileType('r'), default=sys.stdout)
+    parser.add_argument('output', nargs='?', type=argparse.FileType('w'), default=sys.stdout)
     args = parser.parse_args()
     return args.problem, args.input, args.output
 
@@ -68,7 +73,7 @@ def solve_problem(name, data):
 
 
 def print_result(result, file):
-    file.write(result)
+    file.write(str(result))
 
 
 if __name__ == '__main__':
