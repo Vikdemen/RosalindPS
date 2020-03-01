@@ -39,7 +39,7 @@ PROBLEMS = {
     "rabbits-and-recurrence-relations": count_rabbits,
     "mortal-fibonacci-rabbits": count_mortal_rabbits,
     "mendels-first-law": calculate_dominant_probabilities,
-    "calculating-expected-offsprint": expected_dominant_offspring
+    "calculating-expected-offspring": expected_dominant_offspring
 }
 
 
