@@ -10,6 +10,7 @@ from rps.sequence_problems.consensus_and_profile import get_consensus_and_matrix
 from rps.sequence_problems.counting_point_mutations import get_hamming_distance
 from rps.sequence_problems.finding_a_motif_in_dna import get_motif_positions
 from rps.sequence_problems.finding_a_shared_motif import longest_substring
+from rps.sequence_problems.locating_restriction_sites import palindrome_positions
 from rps.sequence_problems.open_reading_frames import get_possible_proteins
 from rps.sequence_problems.rna_splicing import splice_and_translate
 from rps.sequence_problems.transcribing_dna_into_rna import transcribe
@@ -31,6 +32,7 @@ PROBLEMS = {
     "counting-point-mutations": get_hamming_distance,
     "finding-a-motif-in-dna": get_motif_positions,
     "finding-a-shared-motif": longest_substring,
+    "locating-restriction-sites": palindrome_positions,
     "open-reading-frames": get_possible_proteins,
     "rna-splicing": splice_and_translate,
     "transcribing-dna-into-rna": transcribe,

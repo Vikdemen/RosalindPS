@@ -2,7 +2,7 @@ from __future__ import annotations
 from collections import Counter
 from itertools import takewhile
 from typing import Dict, Tuple, List
-from more_itertools import ichunked
+from more_itertools import ichunked, windowed
 
 
 class NucleotideSequence:
@@ -121,6 +121,32 @@ class DNA(NucleotideSequence):
         get_frames(self.reverse_complement(), open_reading_frames)
         orf_strands = [DNA(seq) for seq in open_reading_frames]
         return orf_strands
+
+    def find_reverse_palindromes(self, min_length: int, max_length: int) -> List[Tuple[int, int]]:
+        """
+        :param min_length: Minimum length of palindromes to search
+        :param max_length: Maximum length of palindromes to search
+        :return: 1-based position and length of found palindromes
+        """
+        if min_length < 2:
+            raise ValueError("palindrome can't be shorter than 2 nucleotides")
+        if max_length < min_length:
+            raise ValueError("max length can't be less than minimum length")
+
+        reverse_palindromes = []
+        for length in range(min_length, max_length+1):
+            windows = windowed(self.sequence, length)
+            for index, window in enumerate(windows):
+                if DNA(''.join(window)).is_reverse_palindrome:
+                    reverse_palindromes.append((index+1, length))
+        return reverse_palindromes
+
+    @property
+    def is_reverse_palindrome(self) -> bool:
+        """
+        :return: if the sequence is reverse palindrome
+        """
+        return self.sequence == self.reverse_complement().sequence
 
 
 class RNA(NucleotideSequence):
