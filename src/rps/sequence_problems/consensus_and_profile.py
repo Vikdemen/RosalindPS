@@ -5,23 +5,25 @@ Return: A consensus string and profile matrix for the collection. (If several po
 then you may return any one of them.)
 """
 from typing import List
-import rps.io_manager as io
+from rps.sequence_problems.parsing import parse_fasta
+from rps.sequence_problems.sequences import DNA
 from collections import namedtuple
-
 
 ProfileMatrix = namedtuple('ProfileMatrix', ['A', 'T', 'G', 'C'])
 
 
-def get_profile_matrix(sequences: List[str]):
+def get_profile_matrix(strands: List[DNA]) -> ProfileMatrix:
     """
-    The profile matrix is a 4×n matrix P in which P1,j represents the number of times that 'A' occurs in the jth
+        The profile matrix is a 4×n matrix P in which P1,j represents the number of times that 'A' occurs in the jth
     position of one of the strings, P2,j represents the number of times that C occurs in the jth position,
     and so on.
-    :return:
+    :param strands: Several DNA strands of equal length
+    :return: A profile matrix for these strands
     """
-    sequence_length = len(sequences[0])
+    sequence_length = len(strands[0].sequence)
     # checks that sequences are of the same length
-    assert all((len(seq) == sequence_length for seq in sequences))
+    if any((len(strand.sequence) != sequence_length for strand in strands)):
+        raise ValueError("Sequences must be of same length")
     # list of counts are initially filled with zeros
     matrix = ProfileMatrix(
         [0 for _ in range(sequence_length)],
@@ -29,13 +31,17 @@ def get_profile_matrix(sequences: List[str]):
         [0 for _ in range(sequence_length)],
         [0 for _ in range(sequence_length)]
     )
-    for sequence in sequences:
-        for i, base in enumerate(sequence):
+    for strand in strands:
+        for i, base in enumerate(strand.sequence):
             getattr(matrix, base)[i] += 1
     return matrix
 
 
 def get_consensus_string(matrix: ProfileMatrix) -> str:
+    """
+    :param matrix: Profile matrix
+    :return: Consensus string of that matrix
+    """
     bases = ['A', 'T', 'G', 'C']
     consensus = []
     for counts in zip(matrix.A, matrix.T, matrix.G, matrix.C):
@@ -46,16 +52,9 @@ def get_consensus_string(matrix: ProfileMatrix) -> str:
     return consensus
 
 
-def main():
-    unparsed = io.read_file("input.txt")
-    parsed = io.parse_fasta(unparsed)
-    sequences = [sequence[0] for sequence in parsed]
-    profile_matrix = get_profile_matrix(sequences)
+def get_consensus_and_matrix(fasta_data: List[str]):
+    strands = parse_fasta(fasta_data)
+    profile_matrix = get_profile_matrix(strands)
     consensus_string = get_consensus_string(profile_matrix)
-    print(consensus_string)
-    for base in ['A', 'C', 'G', 'T']:
-        print(f"{base}:", *getattr(profile_matrix, base))
-
-
-if __name__ == '__main__':
-    main()
+    matrix_representation = '\n'.join(f"{base}: {getattr(profile_matrix, base)}" for base in ['A', 'T', 'G', 'C'])
+    return consensus_string, '/n', matrix_representation

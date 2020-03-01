@@ -6,21 +6,14 @@ The RNA codon table dictates the details regarding the encoding of specific codo
 Given: An RNA string s corresponding to a strand of mRNA (of length at most 10 kbp).
 Return: The protein string encoded by s.
 """
+from typing import List
+
 import rps.sequence_problems.sequences as seq
-import rps.io_manager as file
 
 
-def main():
-    rna_sequence = file.read_file('input.txt')[0]
-    translated = translate_dna(rna_sequence)
-    print(translated)
-
-
-def translate_dna(sequence: str) -> str:
+def translate_dna(lines: List[str]) -> str:
+    # only one is expected
+    sequence, = lines
     rna = seq.RNA(sequence)
     protein = rna.translate_to_protein()
     return protein.sequence
-
-
-if __name__ == '__main__':
-    main()

@@ -1,4 +1,4 @@
-from rps.sequence_problems.RNA_splicing import splice_and_translate
+from rps.sequence_problems.rna_splicing import splice_and_translate
 
 
 def test_splice_and_translate():

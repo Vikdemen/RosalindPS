@@ -1,4 +1,4 @@
-import rps.io_manager as io
+from rps.sequence_problems.parsing import parse_fasta
 import rps.sequence_problems.consensus_and_profile as problem
 
 dataset = [
@@ -18,8 +18,7 @@ dataset = [
     "ATGGCACT"
 ]
 
-parsed = io.parse_fasta(dataset)
-sequences = [sequence[0] for sequence in parsed]
+sequences = parse_fasta(dataset)
 
 
 def test_get_profile_matrix():

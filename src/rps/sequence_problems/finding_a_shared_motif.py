@@ -4,11 +4,17 @@ Return: A longest common substring of the collection. (If multiple solutions exi
 solution.)
 """
 from typing import List
+from rps.sequence_problems.parsing import parse_fasta
 
-import rps.io_manager as io
 
+def longest_substring(fasta_data: List[str]) -> str:
+    """
+    :param fasta_data: Several DNA sequences in FASTA format
+    :return: Any of the longest substrings that are subsequences of every strand
+    """
+    strands = parse_fasta(fasta_data)
+    sequences = [strand.sequence for strand in strands]
 
-def longest_substring(sequences: List[str]) -> str:
     # checks if substring is in all sequences
     def is_common(sub):
         for seq in sequences:
@@ -36,14 +42,3 @@ def longest_substring(sequences: List[str]) -> str:
         else:
             # and if we can, we use the new strings as new initial pool for variants
             substrings = longer
-
-
-def main():
-    fasta_sequences = io.read_file("input.txt")
-    # we discard tags
-    sequences = [sequence for sequence, tag in io.parse_fasta(fasta_sequences)]
-    print(longest_substring(sequences))
-
-
-if __name__ == '__main__':
-    main()

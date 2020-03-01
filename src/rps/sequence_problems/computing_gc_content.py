@@ -15,28 +15,15 @@ allows for a default error of 0.001 in all decimal answers unless otherwise stat
 absolute error below.
 """
 from typing import List, Tuple
-import rps.io_manager as io
-import rps.sequence_problems.sequences as seq
+from rps.sequence_problems.parsing import parse_fasta
 
 
-def main():
-    fasta_sequences = io.read_file("input.txt")
-    max_tag, max_gc_content = calculate_max_gc_content(fasta_sequences)
-    print(max_tag)
-    print(max_gc_content)
-
-
-def calculate_max_gc_content(fasta_sequences: List[str]) -> Tuple[str, float]:
+def calculate_max_gc_content(fasta_data: List[str]) -> Tuple[str, float]:
     """
-    :param fasta_sequences: - sequence_problems in FASTA format
+    :param fasta_data: - a list of DNA sequences in FASTA format
     :return: the tag and gc content of DNA strand with highest GC content
     """
-    parsed = io.parse_fasta(fasta_sequences)
-    strands = [seq.DNA(sequence, tag) for sequence, tag in parsed]
+    strands = parse_fasta(fasta_data)
     gc_content_values = [(strand.tag, strand.gc_content()) for strand in strands]
     max_tag, max_gc_content = max(gc_content_values, key=lambda value: value[1])
     return max_tag, max_gc_content
-
-
-if __name__ == '__main__':
-    main()

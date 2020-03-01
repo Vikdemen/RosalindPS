@@ -1,19 +1,7 @@
-def memoization(f):
-    """
-    :param f:
-    :return:
-    Remembers the previously computed values
-    """
-    cache = {}
-
-    def func(*args):
-        if args not in cache:
-            cache[args] = f(*args)
-        return cache[args]
-    return func
+from functools import lru_cache
 
 
-@memoization
+@lru_cache(maxsize=128)
 def count_rabbits(month: int, litter: int) -> int:
     if month <= 2:
         return 1
@@ -21,7 +9,7 @@ def count_rabbits(month: int, litter: int) -> int:
         return count_rabbits(month - 1, litter) + count_rabbits(month - 2, litter) * litter
 
 
-@memoization
+@lru_cache(maxsize=128)
 def count_mortal_rabbits(time: int, lifespan: int) -> int:
     """
     :param time:

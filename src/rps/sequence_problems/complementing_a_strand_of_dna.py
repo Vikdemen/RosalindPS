@@ -4,26 +4,17 @@ The reverse complement of a DNA string s is the string sc formed by reversing th
 complement of each symbol (e.g., the reverse complement of "GTCA" is "TGAC"). Given: A DNA string s of length at
 most 1000 bp. Return: The reverse complement sc of s.
 """
+from typing import List
+from rps.sequence_problems.sequences import DNA
 
 
-import rps.sequence_problems.sequences as seq
-
-
-def main():
-    sequence = input("Enter the DNA sequence \n")
-    reverse_complement = complement_dna(sequence)
-    print(reverse_complement)
-
-
-def complement_dna(dna_sequence: str) -> str:
+def complement_dna(lines: List[str]) -> str:
     """
-    :param dna_sequence: a string of ATGC
+    :param lines: a line with DNA sequence
     :return: str, reversed RNA sequence
     """
-    dna = seq.DNA(dna_sequence)
+    # only one sequence is expected
+    dna_sequence, = lines
+    dna = DNA(dna_sequence)
     reverse_complement = dna.reverse_complement()
     return reverse_complement.sequence
-
-
-if __name__ == '__main__':
-    main()

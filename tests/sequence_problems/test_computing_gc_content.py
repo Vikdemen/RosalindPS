@@ -3,6 +3,10 @@ from pytest import approx
 
 
 def test_calculate_max_gc_content():
+    """
+    Checks if the function correctly finds sequence with largest gc_content
+    :return:
+    """
     sample_data = [
         ">Rosalind_6404",
         "CCTGCGGAAGATCGGCACTAGAATAGCCAGAACCGTTTCTCTGAGGCTTCCGGCCTTCCC"
