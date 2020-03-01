@@ -5,4 +5,4 @@ def test_finding_motif_in_dna():
     sequence = 'GATATATGCATATACTT'
     motif = 'ATAT'
     positions = get_motif_positions([sequence, motif])
-    assert positions == [2, 4, 10]
+    assert positions == "2 4 10"

@@ -11,7 +11,7 @@ from typing import List
 import rps.sequence_problems.sequences as seq
 
 
-def calculate_mass(lines: List[str]) -> float:
+def calculate_mass(lines: List[str]) -> str:
     """
     :param lines: a sequence of aminoacids in the form of the string using 1-letter notation
     :return: Monoisotopic mass of peptide chain with a given sequence of residues
@@ -20,4 +20,4 @@ def calculate_mass(lines: List[str]) -> float:
     peptide_sequence, = lines
     peptide = seq.Peptide(peptide_sequence)
     mass = peptide.calculate_mass()
-    return round(mass, 4)
+    return f"{mass:.4f}"

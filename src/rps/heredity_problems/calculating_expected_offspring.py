@@ -18,7 +18,7 @@ from typing import List
 import rps.heredity_problems.mendel as md
 
 
-def expected_dominant_offspring(lines: List[str]) -> float:
+def expected_dominant_offspring(lines: List[str]) -> str:
     line, = lines
     counts = [int(num) for num in line.split()]
     dom = md.Locus.dom
@@ -33,4 +33,4 @@ def expected_dominant_offspring(lines: List[str]) -> float:
         probabilities = md.Locus.mate(father, mother)
         dominant_probability = probabilities[dom] + probabilities[het]
         total_dominant += offspring_number * dominant_probability * number
-    return total_dominant
+    return f"{total_dominant:.4f}"

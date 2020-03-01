@@ -14,11 +14,11 @@ Return: The ID of the string having the highest GC-content, followed by the GC-c
 allows for a default error of 0.001 in all decimal answers unless otherwise stated; please see the note on
 absolute error below.
 """
-from typing import List, Tuple
+from typing import List
 from rps.sequence_problems.parsing import parse_fasta
 
 
-def calculate_max_gc_content(fasta_data: List[str]) -> Tuple[str, float]:
+def calculate_max_gc_content(fasta_data: List[str]) -> str:
     """
     :param fasta_data: - a list of DNA sequences in FASTA format
     :return: the tag and gc content of DNA strand with highest GC content
@@ -26,4 +26,4 @@ def calculate_max_gc_content(fasta_data: List[str]) -> Tuple[str, float]:
     strands = parse_fasta(fasta_data)
     gc_content_values = [(strand.tag, strand.gc_content()) for strand in strands]
     max_tag, max_gc_content = max(gc_content_values, key=lambda value: value[1])
-    return max_tag, max_gc_content
+    return f"{max_tag}\n{max_gc_content:.4f}"

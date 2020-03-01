@@ -12,6 +12,10 @@ import rps.sequence_problems.sequences as seq
 
 
 def translate_dna(lines: List[str]) -> str:
+    """
+    :param lines: A line with sequence of DNA string
+    :return: Sequence of a protein string encoded in DNA
+    """
     # only one is expected
     sequence, = lines
     rna = seq.RNA(sequence)

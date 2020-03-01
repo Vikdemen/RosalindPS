@@ -11,7 +11,7 @@ from typing import List
 from rps.sequence_problems.parsing import parse_fasta
 
 
-def calculate_tt_ratio(fasta_data: List[str]) -> float:
+def calculate_tt_ratio(fasta_data: List[str]) -> str:
     """
     :param fasta_data: Two equal length DNA sequences in FASTA format
     :return: Transition/transversion ratio, rounded to 4th digit
@@ -20,4 +20,4 @@ def calculate_tt_ratio(fasta_data: List[str]) -> float:
     first, second = strands
     transitions, transversions = first.transitions_transversions(second)
     tt_ratio = transitions / transversions
-    return round(tt_ratio, 4)
+    return f"{tt_ratio:.4f}"

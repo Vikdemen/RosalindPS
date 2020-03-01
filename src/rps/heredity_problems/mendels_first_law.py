@@ -9,7 +9,7 @@ from typing import List
 from rps.heredity_problems.mendel import calculate_dominant_probabilities
 
 
-def probability_of_dominants(lines: List[str]):
+def probability_of_dominants(lines: List[str]) -> str:
     """
     :param lines: A single line with 3 space-separated numbers representing number of organism with dominant homozygous,
     heterozygous and recessive homozygous
@@ -18,4 +18,4 @@ def probability_of_dominants(lines: List[str]):
     line, = lines
     k, m, n = [int(num) for num in line.split()]
     dominant = calculate_dominant_probabilities(k, m, n)
-    return f"{round(dominant, 5)}"
+    return f"{dominant:.4f}"

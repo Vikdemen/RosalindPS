@@ -20,7 +20,8 @@ def test_calculate_max_gc_content():
     ]
     tag: str
     content: float
-    tag, content = calculate_max_gc_content(sample_data)
+    tag, content = calculate_max_gc_content(sample_data).split('\n')
+    content = float(content)
     expected_tag = "Rosalind_0808"
     expected_content = 60.919540
     assert tag == expected_tag
