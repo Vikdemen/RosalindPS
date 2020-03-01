@@ -43,36 +43,51 @@ PROBLEMS = {
 }
 
 
-# TODO - add other modules
-
-
 def main():
-    problem, input_file, output_file = parse_arguments()
+    problem, input_file, output_file, silent = parse_arguments()
+    if not silent:
+        if input_file == sys.stdin:
+            print("Please, input data and press CTRL+D")
+        else:
+            print("Loading data")
     result = solve_problem(problem, data=get_data(input_file))
     print_result(result, output_file)
+    if not silent:
+        print("Task finished")
 
 
 def parse_arguments():
-    parser = argparse.ArgumentParser(description="Solver for rosalind problems")
+    """
+    Parses command line arguments
+    :return: Problem name, input file, output file, silent mode
+    """
+    # Takes in the problem name and optional --input and --output file
+    # If no file path is provided, stdin/stdout is used
+    # If "silent" options is chosen, print statements are deactivated
+    parser = argparse.ArgumentParser(description="Helper program for Rosalind")
     parser.add_argument("problem", help="Choose which problem to solve", choices=PROBLEMS.keys())
-    parser.add_argument('input', nargs='?', type=argparse.FileType('r'), default=sys.stdin)
-    parser.add_argument('output', nargs='?', type=argparse.FileType('w'), default=sys.stdout)
+    parser.add_argument('-i', '--input', help="File to read from", nargs='?',
+                        type=argparse.FileType('r'), default=sys.stdin)
+    parser.add_argument('-o', '--output', help="File to write to", nargs='?',
+                        type=argparse.FileType('w'), default=sys.stdout)
+    parser.add_argument('-s', '--silent', help="Does not print additional messages", action="store_true")
     args = parser.parse_args()
-    return args.problem, args.input, args.output
+    return args.problem, args.input, args.output, args.silent
 
 
 def get_data(file) -> List[str]:
-    data = [line.strip('\n') for line in file.readlines()]
-    return data
+    data = file.readlines()
+    cleaned_data = [line.strip('\n') for line in data]
+    return cleaned_data
 
 
-def solve_problem(name, data):
+def solve_problem(name: str, data: List[str]) -> str:
     action = PROBLEMS[name]
     result = action(data)
     return result
 
 
-def print_result(result, file):
+def print_result(result: str, file):
     file.write(str(result))
 
 
