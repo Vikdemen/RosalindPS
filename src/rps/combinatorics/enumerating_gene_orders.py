@@ -19,6 +19,7 @@ def get_permutations(lines: List[str]) -> str:
     n = int(line)
     if n <= 0:
         raise ValueError("N must be a positive integer")
+    # casting to list to get the total number
     _permutations = list(permutations(range(1, n+1)))
     formatted_permutations = '\n'.join([' '.join((str(number) for number in nums)) for nums in _permutations])
     return f"{len(_permutations)}\n{formatted_permutations}"

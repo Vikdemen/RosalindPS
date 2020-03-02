@@ -15,14 +15,22 @@ def get_signed_permutations(lines: List[str]) -> str:
     n = int(line)
     if n <= 0:
         raise ValueError("N must be a positive integer")
-    unsigned_permutations = list(permutations(range(1, n + 1)))
-    signed_permutations = [signed_from_unsigned(unsigned) for unsigned in unsigned_permutations]
+    # getting permutations
+    unsigned_permutations = permutations(range(1, n + 1))
+    # we turn each permutation into several variants with different signs
+    signed_permutations = (_signed_from_unsigned(unsigned) for unsigned in unsigned_permutations)
+    # combining the variants into a single list
     signed_permutations = list(chain.from_iterable(signed_permutations))
-    formatted_permutations = '\n'.join([' '.join((str(number) for number in nums)) for nums in signed_permutations])
-    return f"{len(signed_permutations)}\n{formatted_permutations}"
+    # make each variant a space separated string
+    formatted_permutations = [' '.join((str(number) for number in _permutation)) for _permutation in signed_permutations]
+    signed_permutations_number = len(formatted_permutations)
+    formatted_permutations = '\n'.join(formatted_permutations)
+    return f"{signed_permutations_number}\n{formatted_permutations}"
 
 
-def signed_from_unsigned(digits):
-    sign_variants = [(digit, -digit) for digit in digits]
-    products = list(product(*sign_variants))
-    return products
+def _signed_from_unsigned(_permutation):
+    # for each number, we have 2 variants
+    sign_variants = ((digit, -digit) for digit in _permutation)
+    # then we combine them in all possible ways
+    all_variants = product(*sign_variants)
+    return all_variants
