@@ -23,6 +23,9 @@ from rps.dynamic_programming_problems.mortal_fibonacci_rabbits import count_mort
 from rps.heredity_problems.mendels_first_law import calculate_dominant_probabilities
 from rps.heredity_problems.calculating_expected_offspring import expected_dominant_offspring
 
+from rps.combinatorics.enumerating_gene_orders import get_permutations
+from rps.combinatorics.enumerating_oriented_gene_orderings import get_signed_permutations
+
 PROBLEMS = {
     "calculating-protein-mass": calculate_mass,
     "counting-dna-nucleotides": count_nucleotides,
@@ -41,7 +44,9 @@ PROBLEMS = {
     "rabbits-and-recurrence-relations": count_rabbits,
     "mortal-fibonacci-rabbits": count_mortal_rabbits,
     "mendels-first-law": calculate_dominant_probabilities,
-    "calculating-expected-offspring": expected_dominant_offspring
+    "calculating-expected-offspring": expected_dominant_offspring,
+    "enumerating-gene-orders": get_permutations,
+    "enumerating-oriented-gene-orderings": get_signed_permutations
 }
 
 
