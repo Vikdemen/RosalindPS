@@ -10,17 +10,24 @@ Given: A collection of at most 10 symbols defining an ordered alphabet, and a po
 Return: All strings of length n that can be formed from the alphabet, ordered lexicographically (use the standard
 order of symbols in the English alphabet). """
 
-from typing import List
+from typing import List, Iterable, Sequence
 from itertools import product
 
 
-def enumerate_kmers(lines: List[str]) -> str:
+def enumerate_kmers(lines: Sequence[str]) -> str:
     alphabet, n = lines
     alphabet = alphabet.split()
     n = int(n)
+    if n <= 0:
+        raise ValueError("N must be a positive integer")
+    ordered_strings = get_ordered_kmers(alphabet, n)
+    return '\n'.join(ordered_strings)
+
+
+def get_ordered_kmers(alphabet: Iterable[str], length: int) -> List[str]:
     # all formable strings is cartesian product
-    products = product(alphabet, repeat=n)
+    products = product(alphabet, repeat=length)
     # they are emitted as tuples
     possible_strings = [''.join(letters) for letters in products]
     ordered_strings = sorted(possible_strings)
-    return '\n'.join(ordered_strings)
+    return ordered_strings

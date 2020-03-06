@@ -22,7 +22,7 @@ def get_signed_permutations(lines: List[str]) -> str:
     # combining the variants into a single list
     signed_permutations = list(chain.from_iterable(signed_permutations))
     # make each variant a space separated string
-    formatted_permutations = [' '.join((str(number) for number in _permutation)) for _permutation in signed_permutations]
+    formatted_permutations = [' '.join((str(num) for num in _permutation)) for _permutation in signed_permutations]
     signed_permutations_number = len(formatted_permutations)
     formatted_permutations = '\n'.join(formatted_permutations)
     return f"{signed_permutations_number}\n{formatted_permutations}"
