@@ -1,6 +1,6 @@
 import argparse
 import sys
-from typing import List
+from typing import List, Callable, Dict
 
 from rps.sequence_problems.counting_dna_nucleotides import count_nucleotides
 from rps.sequence_problems.calculating_protein_mass import calculate_mass
@@ -24,9 +24,12 @@ from rps.heredity_problems.mendels_first_law import calculate_dominant_probabili
 from rps.heredity_problems.calculating_expected_offspring import expected_dominant_offspring
 
 from rps.combinatorics.enumerating_gene_orders import get_permutations
+from rps.combinatorics.enumerating_kmers_lexicographically import enumerate_kmers
 from rps.combinatorics.enumerating_oriented_gene_orderings import get_signed_permutations
 
-PROBLEMS = {
+Problem = Callable[[List[str]], str]
+
+PROBLEMS: Dict[str, Problem] = {
     "calculating-protein-mass": calculate_mass,
     "counting-dna-nucleotides": count_nucleotides,
     "complementing-a-strand-of-dna": complement_dna,
@@ -46,6 +49,7 @@ PROBLEMS = {
     "mendels-first-law": calculate_dominant_probabilities,
     "calculating-expected-offspring": expected_dominant_offspring,
     "enumerating-gene-orders": get_permutations,
+    "enumerating-k-mers-lexicographically": enumerate_kmers,
     "enumerating-oriented-gene-orderings": get_signed_permutations
 }
 
